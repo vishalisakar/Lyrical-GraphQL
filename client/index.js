@@ -7,8 +7,11 @@ import { ApolloProvider } from "react-apollo";
 import SongList from "./components/SongList";
 import App from "./components/App";
 import SongCreate from "./components/SongCreate";
+import SongDetails from './components/SongDetails';
 
-const client = new ApolloClient({});
+const client = new ApolloClient({
+  dataIdFromObject: o => o.id
+});
 
 const Root = () => {
   return (
@@ -17,6 +20,7 @@ const Root = () => {
         <Route path="/" component={App}>
           <IndexRoute component={SongList} />
           <Route path="songs/new" component={SongCreate} />
+          <Route path="songs/:id" component={SongDetails} />
         </Route>
       </Router>
     </ApolloProvider>
@@ -24,3 +28,4 @@ const Root = () => {
 };
 
 ReactDOM.render(<Root />, document.querySelector("#root"));
+ 
